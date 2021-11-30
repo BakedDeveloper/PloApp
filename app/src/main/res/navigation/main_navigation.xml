@@ -12,15 +12,27 @@
         tools:layout="@layout/fragment_start" >
         <action
             android:id="@+id/action_startFragment_to_pooFragment"
-            app:destination="@id/pooFragment"
+            app:destination="@id/newPooFragment"
+            app:enterAnim="@anim/slide_out_top"
+            app:exitAnim="@anim/slide_in_bottom"
+            app:popEnterAnim="@anim/slide_out_bottom"
+            app:popExitAnim="@anim/slide_in_top" />
+        <action
+            android:id="@+id/action_startFragment_to_pooListFragment"
+            app:destination="@id/pooListFragment"
             app:enterAnim="@anim/slide_out_top"
             app:exitAnim="@anim/slide_in_bottom"
             app:popEnterAnim="@anim/slide_out_bottom"
             app:popExitAnim="@anim/slide_in_top" />
     </fragment>
     <fragment
-        android:id="@+id/pooFragment"
+        android:id="@+id/newPooFragment"
         android:name="it.aton.android.ploapp.ui.newpoo.NewPooFragment"
-        android:label="fragment_poo"
+        android:label="fragment_neew_poo"
         tools:layout="@layout/fragment_new_poo" />
+    <fragment
+        android:id="@+id/pooListFragment"
+        android:name="it.aton.android.ploapp.ui.statistics.PooListFragment"
+        android:label="fragment_poo_list"
+        tools:layout="@layout/fragment_poo_list" />
 </navigation>

@@ -22,6 +22,12 @@ public class ImagesRepository {
             R.drawable.poo_color_6
     };
 
+    private Integer pooQuantityImage[]={
+            R.drawable.glass_miniature,
+            R.drawable.bottle_miniature,
+            R.drawable.buket_miniature
+    };
+
     private final Integer[] pooColors ={
             R.color.poo1,
             R.color.poo2,
@@ -40,6 +46,10 @@ public class ImagesRepository {
             R.color.poo16,
             R.color.poo17,
     };
+
+    public Integer[] getPooQuantityImage() {
+        return pooQuantityImage;
+    }
 
     public Integer[] getPooTypeImages(){
         return this.pooTypeImages;

@@ -26,6 +26,9 @@ public class Poo {
     @ColumnInfo(name = "quantity")
     private int quantity;
 
+    @ColumnInfo(name= "quantity_image")
+    private int quantityImage;
+
     @ColumnInfo(name = "date_time")
     private String dateTime;
 
@@ -57,7 +60,8 @@ public class Poo {
             boolean isBloodPresent,
             boolean isPainful,
             int sessionTime,
-            boolean isEnemaUsed) {
+            boolean isEnemaUsed,
+            int quantityImage) {
         this.user_id = user_id;
         this.color = color;
         this.type = type;
@@ -67,6 +71,15 @@ public class Poo {
         this.isPainful = isPainful;
         this.sessionTime = sessionTime;
         this.isEnemaUsed = isEnemaUsed;
+        this.quantityImage= quantityImage;
+    }
+
+    public int getQuantityImage() {
+        return quantityImage;
+    }
+
+    public void setQuantityImage(int quantityImage) {
+        this.quantityImage = quantityImage;
     }
 
     public int getUser_id() {

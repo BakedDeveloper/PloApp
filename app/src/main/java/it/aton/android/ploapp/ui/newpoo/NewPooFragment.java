@@ -143,9 +143,8 @@ public class NewPooFragment extends Fragment {
         });
 
         viewModel.getQuantity().observe(getViewLifecycleOwner(), quantity -> {
-            //binding.newPooSeekBar.setKeyProgressIncrement(quantity);
-            //binding.newPooSeekBar.setProgress(quantity);
             binding.newPooSeekBar.setProgress(quantity, true);
+            //todo add animation
         });
 
         viewModel.getSessionTime().observe(getViewLifecycleOwner(), sessionTime -> {
@@ -169,15 +168,12 @@ public class NewPooFragment extends Fragment {
     }
 
     private void generateOptionsDialogViews() {
-
         LinearLayoutCompat optionsLayout;
-
         optionsLayout = new LinearLayoutCompat(getContext());
         optionsLayout.setOrientation(LinearLayoutCompat.VERTICAL);
         optionsLayout.addView(painCheck);
         optionsLayout.addView(bloodCheck);
         optionsLayout.addView(enemaCheck);
-
 
         //new AlertDialog.Builder(new ContextThemeWrapper(this.getContext(), R.style.AlertDialogCustom))
         //TODO Creare custom AlertDialog
@@ -200,7 +196,7 @@ public class NewPooFragment extends Fragment {
                 new TimePickerDialog(getContext(), (view1, hourOfDay, minute) -> {
                     viewModel.setPooDateTime(dateTime
                             .withYear(year)
-                            .withMonth(monthOfYear)
+                            .withMonth(monthOfYear+1)
                             .withDayOfMonth(dayOfMonth)
                             .withHour(hourOfDay)
                             .withMinute(minute));

@@ -14,6 +14,9 @@ import it.aton.android.ploapp.data.local.model.Poo;
 @Dao
 public interface PooDao {
 
+//    @Insert
+//    Long insertPoo(Poo poo);
+
     @Insert
     Completable insertPoo(Poo poo);
 
@@ -28,6 +31,9 @@ public interface PooDao {
 
     @Query("SELECT * FROM poo WHERE user_id = :userId")
     public Single<List<Poo>> getAllUserPoos(int userId);
+
+    @Query("SELECT * FROM poo")
+    public  Single<List<Poo>> getALlPoos();
 
 
 

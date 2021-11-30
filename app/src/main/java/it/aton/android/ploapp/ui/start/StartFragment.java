@@ -33,6 +33,10 @@ public class StartFragment extends Fragment {
         binding.mainNewPooButton.setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(R.id.action_startFragment_to_pooFragment);
         });
+
+        binding.mainStatistictsButton.setOnClickListener(v ->{
+            Navigation.findNavController(v).navigate(R.id.action_startFragment_to_pooListFragment);
+        });
     }
 
     @Override

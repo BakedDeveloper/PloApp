@@ -20,7 +20,11 @@ public class PooRepository {
         this.pooDao = ploAppDatabase.pooDao();
     }
 
-    public Completable addPoo(Poo poo){
+//    public Long addPoo(Poo poo){
+//
+//       return pooDao.insertPoo(poo);
+//    }
+   public Completable addPoo(Poo poo){
 
        return pooDao.insertPoo(poo);
     }
@@ -35,6 +39,10 @@ public class PooRepository {
 
     public Single<List<Poo>> getAllUserPoos(int userId){
         return pooDao.getAllUserPoos(userId);
+    }
+
+    public Single<List<Poo>> getAllPoos(){
+        return pooDao.getAllPoos();
     }
 
 

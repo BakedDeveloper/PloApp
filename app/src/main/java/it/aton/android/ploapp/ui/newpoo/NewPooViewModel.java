@@ -46,6 +46,16 @@ public class NewPooViewModel extends AndroidViewModel {
     }
 
     public void savePooInDb(){
+
+        int quantityImageResource;
+        if(quantity.getValue()<=100){
+            quantityImageResource=imagesRepository.getPooQuantityImage()[0];
+        }else if(quantity.getValue()>100 && quantity.getValue()<=200){
+            quantityImageResource=imagesRepository.getPooQuantityImage()[1];
+        }else {
+            quantityImageResource=imagesRepository.getPooQuantityImage()[2];
+        }
+
         Poo poo= new Poo(
                 1,
                 pooColorId.getValue(),
@@ -55,9 +65,15 @@ public class NewPooViewModel extends AndroidViewModel {
                 isBloodPresent.getValue(),
                 isPainful.getValue(),
                 Integer.parseInt(sessionTime.getValue()),
-                isEnemaUsed.getValue());
+                isEnemaUsed.getValue(),
+                quantityImageResource
+        );
 
-        pooRepository.addPoo(poo);
+        pooRepository.addPoo(poo).subscribeOn(Schedulers.io()).subscribe(() -> {
+
+        }, throwable -> {
+            Log.e("INSERT", throwable.getMessage());
+        });
     }
 
 
@@ -165,13 +181,13 @@ public class NewPooViewModel extends AndroidViewModel {
 
 
 
-    @SuppressLint("CheckResult")
-    public void insertMockPoo() {
-        Poo mockPoo = new Poo(1, 1, 1, 3, "data", false, false, 20, false);
-        pooRepository.addPoo(mockPoo)
-                .subscribeOn(Schedulers.computation())
-                .subscribe(() -> Log.i("[DATABASE]", "Mock Poo Added to database"));
-    }
+//    @SuppressLint("CheckResult")
+//    public void insertMockPoo() {
+//        Poo mockPoo = new Poo(1, 1, 1, 3, "data", false, false, 20, false);
+//        pooRepository.addPoo(mockPoo)
+//                .subscribeOn(Schedulers.computation())
+//                .subscribe(() -> Log.i("[DATABASE]", "Mock Poo Added to database"));
+//    }
 
 
 }
