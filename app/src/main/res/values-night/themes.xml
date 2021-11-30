@@ -1,0 +1,26 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.PloApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- background color-->
+        <item name='android:windowBackground'>#272323</item>
+        <item name='strokeColor'>#8B8FA5</item>
+        <!-- text color-->
+        <item name='android:textColor'>@color/white</item>
+        <item name='android:imageButtonStyle'>@color/white</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">#783538</item>
+        <item name="colorPrimaryVariant">#B74557</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">#8B8FA5</item>
+        <item name="colorSecondaryVariant">#F0ECE6</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+<!--    <style name="AlertDialogCustom" parent="@android:style/Theme.Dialog">-->
+<!--        <item name='android:windowBackground'>#783538</item>-->
+<!--        <item name='android:textColor'>@color/white</item>-->
+<!--    </style>-->
+</resources>

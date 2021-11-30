@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">PloApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_how_much">HOW MUCH</string>
+    <string name="text_type">TYPE</string>
+    <string name="text_color">COLOR</string>
+    <string name="text_what_did_you_make">WHAT DID YOU MAKE?</string>
+    <string name="text_done">DONE</string>
+    <string name="text_statistics">STATISTICS</string>
+    <string name="text_new_poo">NEW POO</string>
+    <string name="text_ploapp">PloApp</string>
+    <string name="text_love_label">-- To Polpetta with love --</string>
+    <string name="text_options">OPTIONS</string>
+    <string name="text_there_was_pain">THERE WAS PAIN</string>
+    <string name="text_poo_contains_blood">POO CONTAINS BLOOD</string>
+    <string name="text_i_used_an_enema">I USED AN ENEMA</string>
+</resources>

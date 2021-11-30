@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/startFragment">
+
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="it.aton.android.ploapp.ui.start.StartFragment"
+        android:label="fragment_start"
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_startFragment_to_pooFragment"
+            app:destination="@id/pooFragment"
+            app:enterAnim="@anim/slide_out_top"
+            app:exitAnim="@anim/slide_in_bottom"
+            app:popEnterAnim="@anim/slide_out_bottom"
+            app:popExitAnim="@anim/slide_in_top" />
+    </fragment>
+    <fragment
+        android:id="@+id/pooFragment"
+        android:name="it.aton.android.ploapp.ui.newpoo.NewPooFragment"
+        android:label="fragment_poo"
+        tools:layout="@layout/fragment_new_poo" />
+</navigation>

@@ -1,0 +1,50 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.PloApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- background color-->
+        <item name='android:windowBackground'>#783538</item>
+        <!-- text color-->
+        <item name='android:textColor'>@color/black</item>
+        <item name='strokeColor'>#E36877</item>
+        <item name='colorSurface'>#E6807B</item>
+<!--        <item name="colorOnSurface">@color/black</item>-->
+<!--        <item name='cardBackgroundColor'>#E6807B</item>-->
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">#E36877</item>
+        <item name="colorPrimaryVariant">#E6807B</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">#535467</item>
+        <item name="colorSecondaryVariant">#783538</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Style.time" parent="ThemeOverlay.MaterialComponents.TimePicker">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!--    <style name="AlertDialogCustom">-->
+    <!--        &lt;!&ndash; Used for the buttons &ndash;&gt;-->
+    <!--        <item name="colorAccent">#783538</item>-->
+    <!--        &lt;!&ndash; Used for the title and text &ndash;&gt;-->
+    <!--        <item name="android:textColorPrimary">@color/black</item>-->
+    <!--        &lt;!&ndash; Used for the background &ndash;&gt;-->
+    <!--        <item name="android:background">#E36877</item>-->
+    <!--        <item name="android:paddingEnd">0dp</item>-->
+    <!--        <item name="android:paddingStart">0dp</item>-->
+    <!--        <item name="android:paddingTop">0dp</item>-->
+    <!--        <item name="android:paddingBottom">0dp</item>-->
+    <!--        <item name="buttonBarNegativeButtonStyle">@style/DialogButtonStyle</item>-->
+    <!--        <item name="buttonBarPositiveButtonStyle">@style/DialogButtonStyle</item>-->
+    <!--    </style>-->
+
+
+    <!--    <style name="DialogButtonStyle">-->
+    <!--        <item name="android:background">#783538</item>-->
+    <!--        <item name="android:textColor">@color/black</item>-->
+    <!--    </style>-->
+
+</resources>
