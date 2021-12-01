@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="#783538"
+    app:cardCornerRadius="50dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:orientation="vertical">
+
+        <Switch
+            android:id="@+id/blood_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_poo_contains_blood"
+            android:textOff="OFF"
+            android:textOn="ON"
+            android:thumb="@drawable/blood_drop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Switch
+            android:id="@+id/enema_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_i_used_an_enema"
+            android:textOff="OFF"
+            android:textOn="ON"
+            android:thumb="@drawable/enema2"
+            app:layout_constraintEnd_toEndOf="@+id/blood_switch"
+            app:layout_constraintStart_toStartOf="@+id/blood_switch"
+            app:layout_constraintTop_toBottomOf="@+id/blood_switch" />
+
+        <Switch
+            android:id="@+id/pain_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_there_was_pain"
+            android:thumb="@drawable/pain"
+            app:layout_constraintEnd_toEndOf="@+id/enema_switch"
+            app:layout_constraintStart_toStartOf="@+id/enema_switch"
+            app:layout_constraintTop_toBottomOf="@+id/enema_switch" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
