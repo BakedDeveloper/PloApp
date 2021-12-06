@@ -1,35 +1,41 @@
 package it.aton.android.ploapp.ui.statistics;
 
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Database;
-
-import android.app.Application;
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.Resources;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import it.aton.android.ploapp.data.local.converters.Converters;
-import it.aton.android.ploapp.data.local.model.Poo;
-import it.aton.android.ploapp.placeholder.PlaceholderContent.PlaceholderItem;
-import it.aton.android.ploapp.databinding.FragmentPooItemBinding;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.MessageFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
+import io.reactivex.schedulers.Schedulers;
+import it.aton.android.ploapp.R;
+import it.aton.android.ploapp.data.local.converters.Converters;
+import it.aton.android.ploapp.data.local.model.Poo;
+import it.aton.android.ploapp.data.local.repositories.PooRepository;
+import it.aton.android.ploapp.databinding.FragmentPooItemBinding;
 
 public class MyPooRecyclerViewAdapter extends RecyclerView.Adapter<MyPooRecyclerViewAdapter.ViewHolder> {
 
-    private List<Poo> poos;
-    private List<Integer> activatedItemsList= new ArrayList<>();
-    private Context context;
+    private final Context context;
+    private PooRepository pooRepository;
+
+    private final List<Poo> poos;
+    private final List<Poo> activatedItemsList = new ArrayList<>();
+
 
     public MyPooRecyclerViewAdapter(List<Poo> poos, Context context) {
-        this.context= context;
+        this.context = context;
+        pooRepository= new PooRepository(context);
         this.poos = poos;
     }
 
@@ -39,8 +45,9 @@ public class MyPooRecyclerViewAdapter extends RecyclerView.Adapter<MyPooRecycler
         notifyDataSetChanged();
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         return new ViewHolder(FragmentPooItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
@@ -48,7 +55,6 @@ public class MyPooRecyclerViewAdapter extends RecyclerView.Adapter<MyPooRecycler
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.arrangeViews(poos.get(position));
-        holder.setCardItemBehaviour();
     }
 
     @Override
@@ -56,54 +62,93 @@ public class MyPooRecyclerViewAdapter extends RecyclerView.Adapter<MyPooRecycler
         return poos.size();
     }
 
-    public List<Integer> getActivatedItemsList(){
+    @SuppressLint("CheckResult")
+    public void removePooFromDb(RecyclerView.ViewHolder holder) {
+
+        Poo poo= poos.get(holder.getLayoutPosition());
+        poos.remove(poo);
+        pooRepository.removePoo(poo)
+                .subscribeOn(Schedulers.io())
+                .subscribe(
+                        () -> {
+                            Log.i("DATABASE", "Item with id: " + poo.getId() + " removed.");
+                        }
+                        , throwable -> Log.e("DATABASE", "Error removing Poo with id: " + poo.getId() + throwable.getMessage())
+                );
+        notifyItemRemoved(holder.getLayoutPosition());;
+    }
+
+    public List<Poo> getActivatedItemsList() {
         return activatedItemsList;
+    }
+
+    public void swapItems(int from, int to){
+        Collections.swap(poos, from, to);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private final FragmentPooItemBinding binding;
-        private boolean isActivated=false;
+        private boolean isActivated = false;
 
         public ViewHolder(FragmentPooItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
 
-        private void arrangeViews(Poo poo){
+        private void arrangeViews(Poo poo) {
+
+
+            isActivated = activatedItemsList.contains(poo);
+
             binding.pooItemColorCard.setCardBackgroundColor(context.getResources().getColor(poo.getColor(), context.getTheme()));
             binding.pooItemType.setImageResource(poo.getType());
             binding.pooItemQuantity.setImageResource(poo.getQuantityImage());
 
-            LocalDateTime dateTime =Converters.fromStringToDate(poo.getDateTime());
+            LocalDateTime dateTime = Converters.fromStringToDate(poo.getDateTime());
 
             binding.pooItemDate.setText(String.format("%s/%d/%d", dateTime.getMonth(), dateTime.getDayOfMonth(), dateTime.getYear()));
             binding.pooItemTime.setText(String.format("%d:%d", dateTime.getHour(), dateTime.getMinute()));
 
             binding.pooItemSessionTime.setText(MessageFormat.format("{0} minutes", poo.getSessionTime()));
-            if(poo.isBloodPresent()){
+            if (poo.isBloodPresent()) {
+                binding.layoutBlood.setVisibility(View.VISIBLE);
                 binding.pooItemBlood.setVisibility(View.VISIBLE);
             }
-            if(poo.isEnemaUsed()){
+            if (poo.isEnemaUsed()) {
+                binding.layoutBlood.setVisibility(View.VISIBLE);
                 binding.pooItemEnema.setVisibility(View.VISIBLE);
             }
-            if(poo.isPainful()){
+            if (poo.isPainful()) {
+                binding.layoutBlood.setVisibility(View.VISIBLE);
                 binding.pooItemPain.setVisibility(View.VISIBLE);
             }
 
-        }
 
-        private void setCardItemBehaviour(){
+            if (isActivated) {
+                binding.pooItem.setElevation(100);
+                binding.pooItem.setCardBackgroundColor(getColor(R.color.activated_item_background));
+            } else {
+                binding.pooItem.setCardBackgroundColor(getColor(R.color.item_background));
+                binding.pooItem.setElevation(0);
+            }
+
+
             binding.pooItem.setOnLongClickListener(v -> {
+                isActivated = (!isActivated);
 
-                v.setActivated(isActivated=(!isActivated));
-
-                if(isActivated){
-                  activatedItemsList.add(getLayoutPosition());
-                  binding.pooItem.setElevation(100);
+                if (isActivated) {
+                    activatedItemsList.add(poo);
+                } else {
+                    activatedItemsList.remove(poo);
                 }
+                arrangeViews(poo);
                 return true;
             });
+        }
+
+        private int getColor(int colorId) {
+            return context.getResources().getColor(colorId, context.getTheme());
         }
 
     }

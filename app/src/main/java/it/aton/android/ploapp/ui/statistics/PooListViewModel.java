@@ -31,6 +31,7 @@ public class PooListViewModel extends AndroidViewModel {
         loadPoos();
     }
 
+
     private void loadPoos() {
         compositeDisposable.add(pooRepository.getAllPoos()
                 .subscribeOn(Schedulers.io())

@@ -5,6 +5,8 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.util.Objects;
+
 @Entity(tableName = "poo")
 public class Poo {
 
@@ -168,5 +170,16 @@ public class Poo {
         isEnemaUsed = enemaUsed;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Poo poo = (Poo) o;
+        return id == poo.id && user_id == poo.user_id && color == poo.color && type == poo.type && quantity == poo.quantity && quantityImage == poo.quantityImage && isBloodPresent == poo.isBloodPresent && isPainful == poo.isPainful && sessionTime == poo.sessionTime && isEnemaUsed == poo.isEnemaUsed && Objects.equals(dateTime, poo.dateTime);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, user_id, color, type, quantity, quantityImage, dateTime, isBloodPresent, isPainful, sessionTime, isEnemaUsed);
+    }
 }
