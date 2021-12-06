@@ -1,29 +1,21 @@
 package it.aton.android.ploapp.ui.statistics;
 
-import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.selection.SelectionPredicates;
+import androidx.recyclerview.selection.SelectionTracker;
+import androidx.recyclerview.selection.StableIdKeyProvider;
+import androidx.recyclerview.selection.StorageStrategy;
+
 import java.util.ArrayList;
 
-import it.aton.android.ploapp.R;
-import it.aton.android.ploapp.databinding.FragmentNewPooBinding;
 import it.aton.android.ploapp.databinding.FragmentPooListBinding;
-import it.aton.android.ploapp.placeholder.PlaceholderContent;
-import it.aton.android.ploapp.ui.newpoo.NewPooViewModel;
 
-/**
- * A fragment representing a list of Items.
- */
 public class PooListFragment extends Fragment {
 
     FragmentPooListBinding binding;
@@ -40,20 +32,36 @@ public class PooListFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         viewModel = new ViewModelProvider(this, getDefaultViewModelProviderFactory()).get(PooListViewModel.class);
+
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         binding = FragmentPooListBinding.inflate(getLayoutInflater(), container, false);
 
-        binding.list.setAdapter(pooAdapter);
 
         viewModel.getUserPoos().observe(getViewLifecycleOwner(), poos -> {
             pooAdapter.updateData(poos);
 //            binding.list.setAdapter(pooAdapter);
+
+            SelectionTracker<Long> tracker = new SelectionTracker.Builder<>(
+                    "mySelection",
+                    binding.list,
+                    new StableIdKeyProvider(binding.list),
+                    new MyItemDetailsLookup(binding.list),
+                    StorageStrategy.createLongStorage()
+            ).withSelectionPredicate(
+                    SelectionPredicates.createSelectAnything()
+            ).build();
+
+            pooAdapter.setTracker(tracker);
+            binding.list.setAdapter(pooAdapter);
         });
+
+
 
         return binding.getRoot();
     }
