@@ -29,10 +29,23 @@
         android:id="@+id/newPooFragment"
         android:name="it.aton.android.ploapp.ui.newpoo.NewPooFragment"
         android:label="fragment_neew_poo"
-        tools:layout="@layout/fragment_new_poo" />
+        tools:layout="@layout/fragment_new_poo" >
+        <action
+            android:id="@+id/action_newPooFragment_to_newPooOptionFragment"
+            app:destination="@id/newPooOptionFragment"
+            app:enterAnim="@anim/slide_out_right"
+            app:exitAnim="@anim/slide_in_left"
+            app:popEnterAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_in_right" />
+    </fragment>
     <fragment
         android:id="@+id/pooListFragment"
         android:name="it.aton.android.ploapp.ui.statistics.PooListFragment"
         android:label="fragment_poo_list"
         tools:layout="@layout/fragment_poo_list" />
+    <fragment
+        android:id="@+id/newPooOptionFragment"
+        android:name="it.aton.android.ploapp.ui.newpoo.NewPooOptionFragment"
+        android:label="fragment_new_poo_option"
+        tools:layout="@layout/fragment_new_poo_option" />
 </navigation>

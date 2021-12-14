@@ -1,5 +1,6 @@
 package it.aton.android.ploapp.data.local.model;
 
+import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -28,7 +29,7 @@ public class Poo {
     @ColumnInfo(name = "quantity")
     private int quantity;
 
-    @ColumnInfo(name= "quantity_image")
+    @ColumnInfo(name = "quantity_image")
     private int quantityImage;
 
     @ColumnInfo(name = "date_time")
@@ -37,8 +38,17 @@ public class Poo {
     @ColumnInfo(name = "is_blood_present")
     private boolean isBloodPresent;
 
-    @ColumnInfo(name = "is_painful")
-    private boolean isPainful;
+    @ColumnInfo(name = "cramps")
+    private boolean cramps;
+
+    @ColumnInfo(name = "nausea")
+    private boolean nausea;
+
+    @ColumnInfo(name = "swelling")
+    private boolean swelling;
+
+    @ColumnInfo(name = "period")
+    private boolean period;
 
     @ColumnInfo(name = "session_time")
     private int sessionTime;
@@ -60,7 +70,10 @@ public class Poo {
             int quantity,
             String dateTime,
             boolean isBloodPresent,
-            boolean isPainful,
+            boolean cramps,
+            boolean nausea,
+            boolean swelling,
+            boolean period,
             int sessionTime,
             boolean isEnemaUsed,
             int quantityImage) {
@@ -70,10 +83,45 @@ public class Poo {
         this.quantity = quantity;
         this.dateTime = dateTime;
         this.isBloodPresent = isBloodPresent;
-        this.isPainful = isPainful;
         this.sessionTime = sessionTime;
         this.isEnemaUsed = isEnemaUsed;
-        this.quantityImage= quantityImage;
+        this.quantityImage = quantityImage;
+        this.cramps = cramps;
+        this.nausea = nausea;
+        this.swelling = swelling;
+        this.period = period;
+    }
+
+    public boolean isCramps() {
+        return cramps;
+    }
+
+    public void setCramps(boolean cramps) {
+        this.cramps = cramps;
+    }
+
+    public boolean isNausea() {
+        return nausea;
+    }
+
+    public void setNausea(boolean nausea) {
+        this.nausea = nausea;
+    }
+
+    public boolean isSwelling() {
+        return swelling;
+    }
+
+    public void setSwelling(boolean swelling) {
+        this.swelling = swelling;
+    }
+
+    public boolean isPeriod() {
+        return period;
+    }
+
+    public void setPeriod(boolean period) {
+        this.period = period;
     }
 
     public int getQuantityImage() {
@@ -150,14 +198,6 @@ public class Poo {
         isBloodPresent = bloodPresent;
     }
 
-    public boolean isPainful() {
-        return isPainful;
-    }
-
-    public void setPainful(boolean painful) {
-        isPainful = painful;
-    }
-
     public void setSessionTime(int sessionTime) {
         this.sessionTime = sessionTime;
     }
@@ -175,11 +215,25 @@ public class Poo {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Poo poo = (Poo) o;
-        return id == poo.id && user_id == poo.user_id && color == poo.color && type == poo.type && quantity == poo.quantity && quantityImage == poo.quantityImage && isBloodPresent == poo.isBloodPresent && isPainful == poo.isPainful && sessionTime == poo.sessionTime && isEnemaUsed == poo.isEnemaUsed && Objects.equals(dateTime, poo.dateTime);
+        return id == poo.id && user_id == poo.user_id && color == poo.color && type == poo.type && quantity == poo.quantity && quantityImage == poo.quantityImage && isBloodPresent == poo.isBloodPresent && cramps == poo.cramps && nausea == poo.nausea && swelling == poo.swelling && period == poo.period && sessionTime == poo.sessionTime && isEnemaUsed == poo.isEnemaUsed && Objects.equals(dateTime, poo.dateTime);
     }
+
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user_id, color, type, quantity, quantityImage, dateTime, isBloodPresent, isPainful, sessionTime, isEnemaUsed);
+        return Objects.hash(id, user_id, color, type, quantity, quantityImage, dateTime, isBloodPresent, cramps, nausea, swelling, period, sessionTime, isEnemaUsed);
+    }
+
+    public boolean hasOptions() {
+        if(!isBloodPresent()
+                &&!isEnemaUsed()
+                &&!isCramps()
+                &&!isNausea()
+                &&!isSwelling()
+                &&!isPeriod())
+        {
+            return false;
+        }
+        return true;
     }
 }

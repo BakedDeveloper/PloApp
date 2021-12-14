@@ -111,19 +111,33 @@ public class MyPooRecyclerViewAdapter extends RecyclerView.Adapter<MyPooRecycler
             binding.pooItemTime.setText(String.format("%d:%d", dateTime.getHour(), dateTime.getMinute()));
 
             binding.pooItemSessionTime.setText(MessageFormat.format("{0} minutes", poo.getSessionTime()));
+
+            if(!poo.hasOptions()){
+                binding.optionsLayout.setVisibility(View.GONE);
+            }
+
             if (poo.isBloodPresent()) {
-                binding.layoutBlood.setVisibility(View.VISIBLE);
                 binding.pooItemBlood.setVisibility(View.VISIBLE);
             }
             if (poo.isEnemaUsed()) {
-                binding.layoutBlood.setVisibility(View.VISIBLE);
                 binding.pooItemEnema.setVisibility(View.VISIBLE);
             }
-            if (poo.isPainful()) {
-                binding.layoutBlood.setVisibility(View.VISIBLE);
-                binding.pooItemPain.setVisibility(View.VISIBLE);
+
+            if(poo.isCramps()){
+                binding.pooItemCramps.setVisibility(View.VISIBLE);
             }
 
+            if(poo.isNausea()){
+                binding.pooItemNausea.setVisibility(View.VISIBLE);
+            }
+
+            if(poo.isSwelling()){
+                binding.pooItemSwelling.setVisibility(View.VISIBLE);
+            }
+
+            if(poo.isPeriod()) {
+                binding.pooItemPeriod.setVisibility(View.VISIBLE);
+            }
 
             if (isActivated) {
                 binding.pooItem.setElevation(100);

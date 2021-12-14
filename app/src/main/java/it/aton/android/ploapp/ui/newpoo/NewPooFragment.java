@@ -21,6 +21,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.chip.Chip;
@@ -32,19 +34,13 @@ import java.util.Calendar;
 import it.aton.android.ploapp.R;
 import it.aton.android.ploapp.databinding.FragmentNewPooBinding;
 import it.aton.android.ploapp.databinding.NewpooOptionChipChoiceBinding;
+import it.aton.android.ploapp.databinding.NewpooOptionChoiceSilviaBinding;
 
 public class NewPooFragment extends Fragment {
 
     private FragmentNewPooBinding binding;
-    private NewpooOptionChipChoiceBinding optionChipChoiceBinding;
+    //private NewpooOptionChipChoiceBinding optionChipChoiceBinding;
     private NewPooViewModel viewModel;
-
-    private AlertDialog optionDialog;
-//    private ChipGroup chipGroup;
-//    private Chip painCheck;
-//    private Chip bloodCheck;
-//    private Chip enemaCheck;
-
     private LocalDateTime dateTime;
 
     public NewPooFragment() {
@@ -55,7 +51,7 @@ public class NewPooFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = new ViewModelProvider(this, getDefaultViewModelProviderFactory()).get(NewPooViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(NewPooViewModel.class);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("New Poo...");
     }
 
@@ -64,7 +60,6 @@ public class NewPooFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        optionChipChoiceBinding = NewpooOptionChipChoiceBinding.inflate(getLayoutInflater(), null, false);
         binding = FragmentNewPooBinding.inflate(getLayoutInflater(), container, false);
         binding.setViewmodel(viewModel);
         return binding.getRoot();
@@ -75,7 +70,7 @@ public class NewPooFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         binding.newpooOptionsButton.setOnClickListener(v -> {
-            optionDialog.show();
+            Navigation.findNavController(view).navigate(R.id.action_newPooFragment_to_newPooOptionFragment);
         });
 
         binding.newpooDateTimeButton.setOnClickListener(v -> {
@@ -86,44 +81,6 @@ public class NewPooFragment extends Fragment {
             viewModel.savePooInDb();
         });
 
-
-        optionChipChoiceBinding.bloodSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            viewModel.setIsBloodPresent(isChecked);
-        });
-        optionChipChoiceBinding.painSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            viewModel.setIsPainful(isChecked);
-        });
-        optionChipChoiceBinding.enemaSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            viewModel.setIsEnemaUsed(isChecked);
-        });
-
-
-//
-//        painCheck = new Chip(getContext());
-//        painCheck.setText(R.string.text_there_was_pain);
-//        painCheck.setChipIconResource(R.drawable.pain);
-//        painCheck.setOnCheckedChangeListener((buttonView, isChecked) -> {
-//            viewModel.setIsPainful(isChecked);
-//        });
-//
-//        bloodCheck = new Chip(getContext());
-//        bloodCheck.setText(R.string.text_poo_contains_blood);
-////        bloodCheck.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.blood_drop,0);
-//        bloodCheck.setOnCheckedChangeListener((buttonView, isChecked) -> {
-//            viewModel.setIsBloodPresent(isChecked);
-//        });
-//
-//        enemaCheck = new Chip(getContext());
-//        enemaCheck.setText(R.string.text_i_used_an_enema);
-////        enemaCheck.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.enema,0);
-//        enemaCheck.setOnCheckedChangeListener((buttonView, isChecked) -> {
-//            viewModel.setIsEnemaUsed(isChecked);
-//        });
-//
-//        chipGroup= new ChipGroup(getContext());
-//        chipGroup.addView(painCheck);
-//        chipGroup.addView(bloodCheck);
-//        chipGroup.addView(enemaCheck);
 
 
         binding.newpooSessionTime.addTextChangedListener(new TextWatcher() {
@@ -156,8 +113,6 @@ public class NewPooFragment extends Fragment {
             }
         });
 
-
-        generateOptionsDialogViews();
         observeDataFromViewModel();
 
 
@@ -187,37 +142,6 @@ public class NewPooFragment extends Fragment {
             }
         });
 
-        viewModel.getIsBloodPresent().observe(getViewLifecycleOwner(), aBoolean -> {
-            optionChipChoiceBinding.bloodSwitch.setChecked(aBoolean);
-        });
-
-        viewModel.getIsPainful().observe(getViewLifecycleOwner(), aBoolean -> {
-            optionChipChoiceBinding.painSwitch.setChecked(aBoolean);
-        });
-
-        viewModel.getIsEnemaUsed().observe(getViewLifecycleOwner(), aBoolean -> {
-            optionChipChoiceBinding.enemaSwitch.setChecked(aBoolean);
-        });
-
-    }
-
-    private void generateOptionsDialogViews() {
-//        LinearLayoutCompat optionsLayout;
-//        optionsLayout = new LinearLayoutCompat(getContext());
-//        optionsLayout.setOrientation(LinearLayoutCompat.VERTICAL);
-//        optionsLayout.addView(painCheck);
-//        optionsLayout.addView(bloodCheck);
-//        optionsLayout.addView(enemaCheck);
-
-
-        //TODO Creare custom AlertDialog
-        optionDialog = new AlertDialog.Builder(this.getContext())
-                .setTitle("OPTIONS")
-                .setView(optionChipChoiceBinding.getRoot())
-                .setPositiveButton("OK", (dialog, which) -> {
-                    dialog.dismiss();
-                })
-                .create();
     }
 
     public void createDateTimePicker() {

@@ -15,4 +15,20 @@
     <string name="text_there_was_pain">THERE WAS PAIN</string>
     <string name="text_poo_contains_blood">POO CONTAINS BLOOD</string>
     <string name="text_i_used_an_enema">I USED AN ENEMA</string>
+    <string name="text_ciclo">CICLO</string>
+    <string name="text_back">BACK</string>
+    <string name="text_blood">BLOOD</string>
+    <string name="text_enema">ENEMA</string>
+    <string name="text_aches_and_pains">ACHES AND PAINS</string>
+    <string name="text_period">PERIOD</string>
+    <string name="text_no_blood">No blood</string>
+    <string name="text_some_blood">Some blood</string>
+    <string name="text_not_used">Not used</string>
+    <string name="text_used">Used</string>
+    <string name="text_no_one">No one</string>
+    <string name="text_cramps">Cramps</string>
+    <string name="text_nausea">Nausea</string>
+    <string name="text_swelling">Swelling</string>
+    <string name="text_not_now">Not now</string>
+    <string name="text_yes">Yes</string>
 </resources>

@@ -7,6 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
     android:orientation="horizontal"
+    app:cardBackgroundColor="@color/activated_item_background"
     app:cardCornerRadius="30dp">
     <!--    android:background="@drawable/statistics_item_background"-->
 
@@ -24,7 +25,6 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="13/NOVEMBER/2021" />
@@ -41,101 +41,85 @@
             app:layout_constraintTop_toTopOf="@+id/poo_item_date"
             tools:text="13:38" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <TextView
+            android:id="@+id/poo_item_session_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            app:drawableLeftCompat="@drawable/icon_cronometer"
+            app:layout_constraintBottom_toBottomOf="@+id/poo_item_quantity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/poo_item_quantity"
+            app:layout_constraintTop_toTopOf="@+id/poo_item_quantity"
+            tools:text="10 minutes" />
+
+        <LinearLayout
+            android:id="@+id/options_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:orientation="vertical"
+            android:orientation="horizontal"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/poo_item_date">
+            app:layout_constraintTop_toBottomOf="@+id/poo_item_type_card">
 
-            <LinearLayout
-                android:id="@+id/layout_blood"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal"
+            <ImageView
+                android:id="@+id/poo_item_blood"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
                 android:visibility="gone"
-                tools:visibility="visible">
+                app:srcCompat="@drawable/blood_drop"
+                tools:visibility="visible" />
 
-                <ImageView
-                    android:id="@+id/poo_item_blood"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_weight="1"
-                    android:visibility="gone"
-                    app:srcCompat="@drawable/icon_blood"
-                    tools:visibility="visible" />
-
-                <ImageView
-                    android:id="@+id/poo_item_pain"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_weight="1"
-                    android:visibility="gone"
-                    app:srcCompat="@drawable/crampi"
-                    tools:visibility="visible" />
-
-                <ImageView
-                    android:id="@+id/poo_item_enema"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_weight="1"
-                    android:visibility="gone"
-                    app:srcCompat="@drawable/enema"
-                    tools:visibility="visible" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_ciclo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal"
+            <ImageView
+                android:id="@+id/poo_item_cramps"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
                 android:visibility="gone"
-                tools:visibility="visible">
+                app:srcCompat="@drawable/crampi"
+                tools:visibility="visible" />
 
-                <ImageView
-                    android:id="@+id/poo_item_gonfiore"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_weight="1"
-                    android:visibility="gone"
-                    app:srcCompat="@drawable/gonfiore2"
-                    tools:visibility="visible" />
+            <ImageView
+                android:id="@+id/poo_item_enema"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:visibility="gone"
+                app:srcCompat="@drawable/enema"
+                tools:visibility="visible" />
 
-                <ImageView
-                    android:id="@+id/poo_item_ciclo"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_weight="1"
-                    android:visibility="gone"
-                    app:srcCompat="@drawable/ciclo"
-                    tools:visibility="visible" />
+            <ImageView
+                android:id="@+id/poo_item_nausea"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:visibility="gone"
+                app:srcCompat="@drawable/nausea1"
+                tools:visibility="visible" />
 
-                <ImageView
-                    android:id="@+id/poo_item_nausea"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_weight="1"
-                    android:visibility="gone"
-                    app:srcCompat="@drawable/nausea1"
-                    tools:visibility="visible" />
-            </LinearLayout>
+            <ImageView
+                android:id="@+id/poo_item_swelling"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:visibility="gone"
+                app:srcCompat="@drawable/gonfiore2"
+                tools:visibility="visible" />
 
-            <TextView
-                android:id="@+id/poo_item_session_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textStyle="bold"
-                app:drawableLeftCompat="@drawable/icon_cronometer"
-                tools:text="10 minutes" />
-
+            <ImageView
+                android:id="@+id/poo_item_period"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ciclo"
+                tools:visibility="visible" />
         </LinearLayout>
 
         <androidx.cardview.widget.CardView
@@ -143,12 +127,12 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             app:cardCornerRadius="100dp"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/linearLayout"
-            app:layout_constraintTop_toTopOf="@+id/linearLayout">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/poo_item_date">
 
             <ImageView
                 android:id="@+id/poo_item_type"
@@ -162,20 +146,18 @@
             android:id="@+id/poo_item_color_card"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             app:cardCornerRadius="100dp"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+            app:layout_constraintBottom_toBottomOf="@+id/poo_item_type_card"
             app:layout_constraintStart_toEndOf="@+id/poo_item_type_card"
-            app:layout_constraintTop_toTopOf="@+id/linearLayout" />
+            app:layout_constraintTop_toTopOf="@+id/poo_item_type_card" />
 
         <ImageView
             android:id="@+id/poo_item_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/poo_item_color_card"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/poo_item_color_card"
             app:layout_constraintTop_toTopOf="@+id/poo_item_color_card"
             tools:srcCompat="@drawable/bottle_miniature" />

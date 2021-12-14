@@ -3,13 +3,16 @@ package it.aton.android.ploapp.ui.newpoo;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+
 import io.reactivex.schedulers.Schedulers;
 import it.aton.android.ploapp.data.local.converters.Converters;
 import it.aton.android.ploapp.data.local.model.Poo;
@@ -27,17 +30,20 @@ public class NewPooViewModel extends AndroidViewModel {
     private final ArrayList<Integer> pooColorIds = new ArrayList<>(Arrays.asList(imagesRepository.getPooColors()));
 
 
-
-
-
     private final MutableLiveData<Integer> pooTypeImageId = new MutableLiveData<>(pooTypeImageIds.get(0));
     private final MutableLiveData<Integer> pooColorId = new MutableLiveData<>(pooColorIds.get(7));
     private final MutableLiveData<Integer> quantity = new MutableLiveData<>(50);
     private final MutableLiveData<LocalDateTime> dateTime = new MutableLiveData<>(LocalDateTime.now());
-    private final MutableLiveData<Boolean> isBloodPresent = new MutableLiveData<>(false);
-    private final MutableLiveData<Boolean> isPainful = new MutableLiveData<>(false);
-    private final MutableLiveData<Boolean> isEnemaUsed = new MutableLiveData<>(false);
     private final MutableLiveData<String> sessionTime = new MutableLiveData<>("20");
+
+    private final MutableLiveData<Boolean> cramps = new MutableLiveData<>(false);
+    private final MutableLiveData<Boolean> nausea = new MutableLiveData<>(false);
+    private final MutableLiveData<Boolean> swelling = new MutableLiveData<>(false);
+
+    private final MutableLiveData<Boolean> isBloodPresent = new MutableLiveData<>(false);
+    private final MutableLiveData<Boolean> period = new MutableLiveData<>(false);
+    private final MutableLiveData<Boolean> isEnemaUsed = new MutableLiveData<>(false);
+
 
 
     public NewPooViewModel(@NonNull Application application) {
@@ -45,74 +51,87 @@ public class NewPooViewModel extends AndroidViewModel {
         pooRepository = new PooRepository(application);
     }
 
-    public void savePooInDb(){
+    public void savePooInDb() {
 
         int quantityImageResource;
-        if(quantity.getValue()<=100){
-            quantityImageResource=imagesRepository.getPooQuantityImage()[0];
-        }else if(quantity.getValue()>100 && quantity.getValue()<=200){
-            quantityImageResource=imagesRepository.getPooQuantityImage()[1];
-        }else {
-            quantityImageResource=imagesRepository.getPooQuantityImage()[2];
+        if (quantity.getValue() <= 100) {
+            quantityImageResource = imagesRepository.getPooQuantityImage()[0];
+        } else if (quantity.getValue() > 100 && quantity.getValue() <= 200) {
+            quantityImageResource = imagesRepository.getPooQuantityImage()[1];
+        } else {
+            quantityImageResource = imagesRepository.getPooQuantityImage()[2];
         }
 
-        Poo poo= new Poo(
+        Poo poo = new Poo(
                 1,
                 pooColorId.getValue(),
                 pooTypeImageId.getValue(),
                 quantity.getValue(),
                 Converters.fromDateToString(dateTime.getValue()),
                 isBloodPresent.getValue(),
-                isPainful.getValue(),
+                cramps.getValue(),
+                nausea.getValue(),
+                swelling.getValue(),
+                period.getValue(),
                 Integer.parseInt(sessionTime.getValue()),
                 isEnemaUsed.getValue(),
                 quantityImageResource
+                //TODO aggiungere Cramps, period, nausea, swelling
         );
 
-        pooRepository.addPoo(poo).subscribeOn(Schedulers.io()).subscribe(() -> {
+        pooRepository.addPoo(poo)
+                .subscribeOn(Schedulers.io())
+                .subscribe(
+                        () -> Log.i("INSERT", "A new poo was added: " + poo.toString()),
 
-        }, throwable -> {
-            Log.e("INSERT", throwable.getMessage());
-        });
+                        throwable -> Log.e("INSERT", throwable.getMessage()));
     }
 
-
-    //TODO AGGIUNGI CONDIZIONI A TUTTI I SET
-
-    public void setPooQuantity(int pooQuantity){
+    public void setPooQuantity(int pooQuantity) {
         this.quantity.setValue(pooQuantity);
     }
 
-    public void setPooDateTime(LocalDateTime pooDateTime){
-        if(!this.dateTime.getValue().equals(pooDateTime)){
+    public void setPooDateTime(LocalDateTime pooDateTime) {
+        if (!this.dateTime.getValue().equals(pooDateTime)) {
             this.dateTime.setValue(pooDateTime);
         }
     }
 
-    public void setIsBloodPresent(boolean isBloodPresent){
-        if(!this.isBloodPresent.getValue().equals(isBloodPresent)){
-            this.isBloodPresent.setValue(isBloodPresent);
-        }
+    public void setIsBloodPresent() {
+        this.isBloodPresent.setValue(!isBloodPresent.getValue());
     }
 
-    public void setIsPainful(boolean isPainful){
-        if(!this.isPainful.getValue().equals(isPainful)) {
-            this.isPainful.setValue(isPainful);
-        }
+    public void setNoPain(){
+        this.cramps.setValue(false);
+        this.nausea.setValue(false);
+        this.swelling.setValue(false);
     }
 
-    public void setIsEnemaUsed(boolean isEnemaUsed){
-        if(!this.isEnemaUsed.getValue().equals(isEnemaUsed)){
-            this.isEnemaUsed.setValue(isEnemaUsed);
-        }
+    public void setCramps() {
+        this.cramps.setValue(!cramps.getValue());
     }
 
-    public void setSessionTime(String pooTime){
-        if(!this.sessionTime.getValue().equals(pooTime)){
+    public void setNausea() {
+       this.nausea.setValue(!nausea.getValue());
+    }
+
+    public void setSwelling() {
+      this.swelling.setValue(!swelling.getValue());
+    }
+
+    public void setPeriod() {
+        this.period.setValue(!period.getValue());
+    }
+
+    public void setIsEnemaUsed() {
+      this.isEnemaUsed.setValue(!isEnemaUsed.getValue());
+    }
+
+    public void setSessionTime(String pooTime) {
+        if (!this.sessionTime.getValue().equals(pooTime)) {
             this.sessionTime.setValue(pooTime);
         }
     }
-
 
 
     public void nextPooTypeImage() {
@@ -163,21 +182,36 @@ public class NewPooViewModel extends AndroidViewModel {
         return dateTime;
     }
 
+    public MutableLiveData<String> getSessionTime(){
+        return sessionTime;
+    }
+
     public MutableLiveData<Boolean> getIsBloodPresent() {
         return isBloodPresent;
     }
 
-    public MutableLiveData<Boolean> getIsPainful() {
-        return isPainful;
+    public MutableLiveData<Boolean> getCramps() {
+        return cramps;
+    }
+
+    public MutableLiveData<Boolean> getNausea() {
+        return nausea;
+    }
+
+    public MutableLiveData<Boolean> getSwelling() {
+        return swelling;
+    }
+
+    public MutableLiveData<Boolean> getPeriod() {
+        return period;
     }
 
     public MutableLiveData<Boolean> getIsEnemaUsed() {
         return isEnemaUsed;
     }
 
-    public MutableLiveData<String> getSessionTime() {
-        return sessionTime;
-    }
+
+
 
 
 
