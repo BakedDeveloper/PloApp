@@ -8,8 +8,9 @@ import androidx.room.Query;
 import androidx.room.Update;
 import java.util.List;
 
-import io.reactivex.Completable;
-import io.reactivex.Single;
+
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Single;
 import it.aton.android.ploapp.data.local.model.Poo;
 @Dao
 public interface PooDao {

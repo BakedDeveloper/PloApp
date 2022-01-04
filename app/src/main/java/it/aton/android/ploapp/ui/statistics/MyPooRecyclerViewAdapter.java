@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import it.aton.android.ploapp.R;
 import it.aton.android.ploapp.data.local.converters.Converters;
 import it.aton.android.ploapp.data.local.model.Poo;

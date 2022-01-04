@@ -11,8 +11,8 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.List;
 
 
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import it.aton.android.ploapp.data.local.model.Poo;
 import it.aton.android.ploapp.data.local.repositories.PooRepository;
 
