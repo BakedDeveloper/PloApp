@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +50,10 @@ public class NewPooOptionFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        binding.poooptionsBack.setOnClickListener(v -> {
+            Navigation.findNavController(view).popBackStack();
+        });
 
         binding.imageBloodDrop.setOnClickListener(v -> {
             viewModel.setIsBloodPresent();

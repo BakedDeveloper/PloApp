@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingHorizontal="50dp"
     tools:context=".ui.start.StartFragment">
 
     <Button
@@ -15,9 +16,8 @@
         android:paddingBottom="15dp"
         android:text="@string/text_statistics"
         android:textColor="#212121"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_new_poo_button" />
 
     <androidx.cardview.widget.CardView
@@ -58,24 +58,9 @@
         app:iconGravity="textStart"
         app:iconPadding="0dp"
         app:iconSize="30dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_ploapp_label" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="45dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="370dp" />
 
     <TextView
         android:id="@+id/main_ploapp_label"
@@ -84,9 +69,8 @@
         android:text="@string/text_ploapp"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.479"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
     <TextView
@@ -107,11 +91,37 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="24sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/main_love_label"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_statisticts_button"
         app:layout_constraintVertical_bias="0.81"
         tools:text="48:22:13" />
+
+    <TextView
+        android:id="@+id/start_quote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:bufferType="spannable"
+        android:fontFamily="serif"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/text_margin"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/start_quote_author"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="&quot;Always tell the truth. That way, you don't have to remember what you said.&quot;" />
+
+    <TextView
+        android:id="@+id/start_quote_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/main_love_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text='"Mark Twain"' />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

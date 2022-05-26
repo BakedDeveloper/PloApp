@@ -79,9 +79,8 @@ public class NewPooFragment extends Fragment {
 
         binding.newPooDoneButton.setOnClickListener(v -> {
             viewModel.savePooInDb();
+            Navigation.findNavController(view).popBackStack();
         });
-
-
 
         binding.newpooSessionTime.addTextChangedListener(new TextWatcher() {
             @Override

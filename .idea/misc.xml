@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/PC/Desktop/Aton/Aton-Workspace/Ploapp/PLoappRemote/app/src/main/res/layout/fragment_new_poo.xml" value="0.2125" />
+        <entry key="..\:/Users/PC/Desktop/Aton/Aton-Workspace/Ploapp/PLoappRemote/app/src/main/res/layout/fragment_new_poo_option.xml" value="0.33" />
+        <entry key="..\:/Users/PC/Desktop/Aton/Aton-Workspace/Ploapp/PLoappRemote/app/src/main/res/layout/fragment_start.xml" value="0.33" />
         <entry key="..\:/Users/User 4/Desktop/Federiconi/Project_Repository/AndroidRepository/PloApp/app/src/main/res/drawable-anydpi/arrow_dx.xml" value="0.12962962962962962" />
         <entry key="..\:/Users/User 4/Desktop/Federiconi/Project_Repository/AndroidRepository/PloApp/app/src/main/res/drawable-anydpi/arrow_sx.xml" value="0.12962962962962962" />
         <entry key="..\:/Users/User 4/Desktop/Federiconi/Project_Repository/AndroidRepository/PloApp/app/src/main/res/drawable-anydpi/icon_blood.xml" value="0.309375" />
@@ -36,7 +39,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -13,7 +13,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import io.reactivex.schedulers.Schedulers;
+
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import it.aton.android.ploapp.data.local.converters.Converters;
 import it.aton.android.ploapp.data.local.model.Poo;
 import it.aton.android.ploapp.data.local.repositories.PooRepository;
