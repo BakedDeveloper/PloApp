@@ -1,4 +1,4 @@
-# PloappRemote
+# PloaApp
 Come sta il tuo intestino, quante volte fai "ploap"?
 
 Ploapp nasce come agenda giornaliera per il tracciamento della tua salute intestinale.
